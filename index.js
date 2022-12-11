@@ -7,9 +7,7 @@ class CustomSelect {
     #dropDownText
     #dropDownList
     #currentSelectedOption
-    #liElements
-    #ulElement
-    #liEl
+
 
     constructor(id, options) {
         this.#id = id;
@@ -30,9 +28,7 @@ class CustomSelect {
         this.#dropDownList.className = 'select-dropdown__list'
         this.#dropDownList.classList.add(`select-dropdown__list--${this.#id}`)
         this.#dropDown.append(this.#dropDownList)
-        this.#liElements = document.querySelectorAll('.select-dropdown__list-item')
-        // this.#liEl = document.querySelector('li')
-        // this.#currentSelectedOption = 3241
+        this.#currentSelectedOption =
 
 
         options.forEach(item => {
@@ -51,23 +47,20 @@ class CustomSelect {
         this.#dropDownList.addEventListener('click', (event) => {
             const {target} = event
             const selectedValue = target.getAttribute('data-value')
+            const liElements = document.querySelectorAll('li')
             this.#currentSelectedOption = this.#options[selectedValue - 1]
             this.#dropDownText.innerText = this.#options[selectedValue - 1].text
-
-          this.#liElements.forEach(item => {
+          liElements.forEach(item => {
                 item.classList.remove('selected')
             })
-            console.log(this.#liElements)
             target.classList.toggle('selected')
         })
-
-
     }
 
-    get currentSelectedOption() {
+    get selectedValue() {
         return this.#currentSelectedOption
     }
-    
+
     render(container) {
         mainContainer.append(this.#dropDown)
     }
@@ -94,5 +87,4 @@ customSelect.render(mainContainer)
 
 console.log(customSelect)
 
-
-console.log(customSelect.currentSelectedOption)
+console.log(customSelect.selectedValue)
